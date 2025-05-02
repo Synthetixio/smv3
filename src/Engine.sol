@@ -445,6 +445,12 @@ contract Engine is
             PERPS_MARKET_PROXY.modifyCollateral(
                 _accountId, SSTATA_SYNTH_MARKET_ID, sstataAmount.toInt256()
             );
+
+            emit CollateralModifiedStata({
+                accountId: _accountId,
+                amountUSDC: int256(_amount),
+                amountStataUsdc: int256(sstataAmount)
+            });
         } else {
             if (!isAccountOwner(_accountId, msg.sender)) revert Unauthorized();
 
@@ -460,10 +466,10 @@ contract Engine is
             uint256 zappedOutUSDC =
                 zap.zapOut(sStataUSDCAmount, _zapMinAmountOut, msg.sender);
 
-            emit Redeemed({
+            emit CollateralModifiedStata({
                 accountId: _accountId,
-                amountUSDC: zappedOutUSDC,
-                amountSSTATAUSDC: sStataUSDCAmount
+                amountUSDC: -int256(zappedOutUSDC),
+                amountStataUsdc: -int256(sStataUSDCAmount)
             });
         }
     }
