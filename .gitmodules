@@ -6,4 +6,4 @@
 	url = https://github.com/OpenZeppelin/openzeppelin-contracts
 [submodule "lib/zap"]
 	path = lib/zap
-	url = https://github.com/JaredBorders/zap
+	url = https://github.com/Synthetixio/zap.git
